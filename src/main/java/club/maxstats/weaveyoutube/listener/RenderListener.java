@@ -8,11 +8,11 @@ import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.AxisAlignedBB;
 
 import static org.lwjgl.opengl.GL11.*;
-
 public class RenderListener {
     public static final int NPC_UUID_VERSION = 2;
     public boolean renderESP = true;
@@ -28,7 +28,7 @@ public class RenderListener {
     }
 
     private void renderESP(Entity entity, float partialTicks) {
-        if (entity.getUniqueID().version() != NPC_UUID_VERSION && this.renderESP) {
+        if (entity.getUniqueID().version() != NPC_UUID_VERSION && this.renderESP && entity.instanceofEntityPlayer == true) {
             glDisable(GL_DEPTH_TEST);
             GlStateManager.disableAlpha();
             GlStateManager.disableTexture2D();
