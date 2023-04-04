@@ -28,7 +28,12 @@ public class RenderListener {
     }
 
     private void renderESP(Entity entity, float partialTicks) {
-        if (entity.getUniqueID().version() != NPC_UUID_VERSION && this.renderESP && entity instanceof EntityPlayer == true) {
+        if (entity.getUniqueID().version() != NPC_UUID_VERSION && this.renderESP) {
+            
+            if(entity instanceof EntityPlayer == true){
+            return;
+            }
+            
             glDisable(GL_DEPTH_TEST);
             GlStateManager.disableAlpha();
             GlStateManager.disableTexture2D();
