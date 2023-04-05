@@ -10,6 +10,7 @@ public class ToggleESPCommand extends Command {
         this.renderListener = renderListener;
     }
 
+
     @Override
     public void handle(String[] args) {
         this.renderListener.renderESP = !this.renderListener.renderESP;

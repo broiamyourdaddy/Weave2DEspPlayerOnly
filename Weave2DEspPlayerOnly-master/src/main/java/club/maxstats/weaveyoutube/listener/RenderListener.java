@@ -9,7 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Timer;
+
 import static org.lwjgl.opengl.GL11.*;
 public class RenderListener {
     public static final int NPC_UUID_VERSION = 2;
@@ -28,13 +28,12 @@ public class RenderListener {
     private void renderESP(Entity entity, float partialTicks) {
         if (entity.getUniqueID().version() != NPC_UUID_VERSION && this.renderESP && entity instanceof EntityPlayer){
 
-            
             glDisable(GL_DEPTH_TEST);
             GlStateManager.disableAlpha();
             GlStateManager.disableTexture2D();
             GlStateManager.disableLighting();
 
-            ((EntityLivingBase)entity, Minecraft.getMinecraft().getRenderManager(), partialTicks);
+            render2dBox((EntityLivingBase)entity, Minecraft.getMinecraft().getRenderManager(), partialTicks);
 
             GlStateManager.color(1.0F, 1.0F, 1.0F);
             GlStateManager.enableLighting();
@@ -43,15 +42,6 @@ public class RenderListener {
             glEnable(GL_DEPTH_TEST);
         }
     }
-    public static void render3dBox(Entity e, int type, double expand, double shift, int color) {
-        if (e instanceof EntityLivingBase) {
-            double x = e.lastTickPosX + (e.posX - e.lastTickPosX) * (double) new Timer().renderPartialTicks - mc.getRenderManager().viewerPosX;
-            double y = e.lastTickPosY + (e.posY - e.lastTickPosY) * (double) new Timer().renderPartialTicks - mc.getRenderManager().viewerPosY;
-            double z = e.lastTickPosZ + (e.posZ - e.lastTickPosZ) * (double) new Timer().renderPartialTicks - mc.getRenderManager().viewerPosZ;
-            float d = (float) expand / 40.0F;
-        }
-
-
 
     private void render2dBox(EntityLivingBase entity, RenderManager renderManager, float partialTicks) {
         glPushMatrix();
